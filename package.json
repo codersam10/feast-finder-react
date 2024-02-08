@@ -1,0 +1,26 @@
+{
+  "name": "namaste-react",
+  "version": "1.0.0",
+  "description": "namaste react practice project",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/codersam10/Namaste-react.git"
+  },
+  "author": "sam",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/codersam10/Namaste-react/issues"
+  },
+  "homepage": "https://github.com/codersam10/Namaste-react#readme",
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+    "parcel": "^2.11.0",
+    "process": "^0.11.10"
+  }
+}
