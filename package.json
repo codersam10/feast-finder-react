@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "namaste react practice project",
   "scripts": {
-    "start": "parcel index.html",
+    "start": "parcel ./src/index.html",
     "build": "parcel build index.html",
     "test": "jest"
   },
@@ -24,6 +24,7 @@
   },
   "devDependencies": {
     "parcel": "^2.11.0",
-    "process": "^0.11.10"
+    "process": "^0.11.10",
+    "tailwindcss": "^3.4.1"
   }
 }

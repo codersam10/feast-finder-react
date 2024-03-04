@@ -1,30 +1,13 @@
-import { useState, useEffect } from "react";
 import Shimmer from "./Shimmer";
 import { useParams } from "react-router-dom";
-import { resMenuAPI } from "../utilis/constants";
+import useRestaurantMenu from "../utilis/useRestaurantMenu";
 
 const RestaurantMenu = () => {
-  console.log("Restaurant Menu rendered");
-  const [menuInfo, setMenuInfo] = useState(null);
-
   const { resId } = useParams();
-  console.log("Here is the api=>" + resMenuAPI + resId);
 
-  useEffect(() => {
-    fetchMenu();
-  }, []);
-
-  const fetchMenu = async () => {
-    const data = await fetch(resMenuAPI + resId);
-
-    const json = await data?.json();
-    setMenuInfo(json);
-  };
+  const menuInfo = useRestaurantMenu(resId);
 
   if (menuInfo === null) return <Shimmer />;
-
-  // console.log("this is menuInfo");
-  // console.log(menuInfo);
 
   //destructuring of fetched data to get restaurant name, cuisones etc
   const {
@@ -56,17 +39,23 @@ const RestaurantMenu = () => {
                 {cardItem?.card?.card?.title}
                 <ul>
                   {cardItem?.card?.card?.categories?.map((categories) => {
-                    return (<li>
-                      {categories?.title}
-                      <ul>
-                        {categories?.itemCards.map((itemCards)=>{
-                          return(
-                            <li key={itemCards?.card?.info?.id}>{itemCards?.card?.info?.name} <span className="menu-item-price">Rs.{itemCards?.card?.info?.price/100}</span> </li>
-
-                          )
-                        })}
-                      </ul>
-                      </li>);
+                    return (
+                      <li>
+                        {categories?.title}
+                        <ul>
+                          {categories?.itemCards.map((itemCards) => {
+                            return (
+                              <li key={itemCards?.card?.info?.id}>
+                                {itemCards?.card?.info?.name}{" "}
+                                <span className="menu-item-price">
+                                  Rs.{itemCards?.card?.info?.price / 100}
+                                </span>{" "}
+                              </li>
+                            );
+                          })}
+                        </ul>
+                      </li>
+                    );
                   })}
                 </ul>
               </li>

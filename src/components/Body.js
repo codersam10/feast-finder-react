@@ -18,6 +18,7 @@ const Body = () => {
       "https://www.swiggy.com/dapi/restaurants/list/v5?lat=14.827476982708651&lng=74.13284070789814&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
     );
     const json = await data.json();
+    console.log(json)
 
     //fetch data that won't be modified
     setListOfRestaurants(
@@ -37,10 +38,10 @@ const Body = () => {
   } else {
     return (
       <div className="body">
-        <div className="filter">
+        <div className="filter-section  p-2 ">
           <input
             type="text"
-            className="search-box"
+            className="search-box shadow-lg p-3 rounded-md"
             placeholder="Search..."
             value={searchText}
             onChange={(e) => setSearchText(e.target.value)}
@@ -55,7 +56,7 @@ const Body = () => {
             }}
           />
           <button
-            className="search-button"
+            className="search-button ml-4 shadow-xl p-3 rounded-md"
             onClick={() => {
               const filteredList = listOfRestaurants.filter((res) =>
                 res.info.name.toLowerCase().includes(searchText.toLowerCase())
@@ -68,7 +69,7 @@ const Body = () => {
           </button>
 
           <button
-            className="filter-btn"
+            className="filter-btn ml-4 shadow-lg p-3 rounded-md"
             onClick={() => {
               const filteredList = listOfRestaurants.filter(
                 (res) => res.info.avgRating < 4
@@ -80,15 +81,15 @@ const Body = () => {
           </button>
 
           <button
-            className="show-all"
+            className="show-all ml-4 shadow-lg p-3 rounded-md"
             onClick={() => setFilteredRestaurants(listOfRestaurants)}
           >
             Show All
           </button>
         </div>
-        <div className="res-wrapper">
-          <div className="res-container">
-            {filteredRestaurants.map((restaurant) => (
+
+          <div className="res-container flex flex-wrap gap-5">
+            {filteredRestaurants?.map((restaurant) => (
               <Link
                 key={restaurant.info.id}
                 to={"/restaurant/" + restaurant.info.id}
@@ -97,7 +98,7 @@ const Body = () => {
               </Link>
             ))}
           </div>
-        </div>
+
       </div>
     );
   }

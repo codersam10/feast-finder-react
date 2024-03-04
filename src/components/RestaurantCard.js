@@ -9,19 +9,19 @@ const RestaurantCard = (props) => {
     cloudinaryImageId: imageId,
   } = restData?.info;
   return (
-    <div className="res-card">
-      <div className="img-container">
+    <div className="res-card w-72 p-2 rounded-xl shadow-md hover:shadow-xl hover:scale-105 duration-200">
+      <div className="img-container h-40 rounded-xl overflow-hidden">
         <img
           src={RESTAURANT_IMAGE_URL + imageId}
           alt="restaurant-logo"
-          className="res-img"
+          className="res-img object-cover w-[100%] h-[100%]"
         />
       </div>
 
-      <h3>{name}</h3>
-      <h4>{costForTwo}</h4>
-      <h4>Rating {ratings} star</h4>
-      <h4>{cuisines.join(", ")}.</h4>
+      <h3 className="text-xl font-semibold overflow-ellipsis overflow-hidden whitespace-nowrap">{name}</h3>
+      <h4 className="text-base">{costForTwo}</h4>
+      <h4 className="text-base">Rating {ratings} star</h4>
+      <h4 className="text-base overflow-ellipsis overflow-hidden whitespace-nowrap">{cuisines.join(", ")}.</h4>
     </div>
   );
 };
