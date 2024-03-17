@@ -1,4 +1,4 @@
-import RestaurantCard from "./RestaurantCard";
+import RestaurantCard, { withOpenedCard } from "./RestaurantCard";
 import { useState, useEffect } from "react";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
@@ -8,9 +8,11 @@ const Body = () => {
   const [filteredRestaurants, setFilteredRestaurants] = useState([]);
   const [searchText, setSearchText] = useState([]);
 
+  const OpenedCard = withOpenedCard(RestaurantCard);
+
   useEffect(() => {
     fetchData();
-    console.log("fetching data");
+    // console.log("fetching data");
   }, []);
 
   const fetchData = async () => {
@@ -18,14 +20,14 @@ const Body = () => {
       "https://www.swiggy.com/dapi/restaurants/list/v5?lat=14.827476982708651&lng=74.13284070789814&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
     );
     const json = await data.json();
-    console.log(json)
+    console.log(json);
 
     //fetch data that won't be modified
     setListOfRestaurants(
       json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants
     );
 
-    //copy of fetch data that will be used for modification
+    //copy of fetch data that will be used for state modification
     setFilteredRestaurants(
       json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants
     );
@@ -88,17 +90,22 @@ const Body = () => {
           </button>
         </div>
 
-          <div className="res-container flex flex-wrap gap-5">
-            {filteredRestaurants?.map((restaurant) => (
-              <Link
-                key={restaurant.info.id}
-                to={"/restaurant/" + restaurant.info.id}
-              >
-                <RestaurantCard restData={restaurant} />
-              </Link>
-            ))}
-          </div>
+        <div className="res-container flex flex-wrap gap-5">
+          {filteredRestaurants?.map((restaurant) => (
+            <Link
+              key={restaurant.info.id}
+              to={"/restaurant/" + restaurant.info.id}
+            >
 
+              {/* opened not-opened functionality */}
+              {restaurant?.info?.availability?.opened ? (
+                <OpenedCard restData={restaurant} />
+              ) : (
+                <RestaurantCard restData={restaurant} />
+              )}
+            </Link>
+          ))}
+        </div>
       </div>
     );
   }

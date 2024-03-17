@@ -1,15 +1,20 @@
 import { LOGO_URL } from "../utilis/constants";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import useOnlineStatus from "../utilis/useOnlineStatus";
+import UserContext from "../utilis/UserContext";
 
 const Header = () => {
   const [btnName, setBtnName] = useState("Login");
 
   const onlineStatus = useOnlineStatus();
+
+  const data = useContext(UserContext);
+  // console.log(data.loggedInUser)
+
   console.log("header rendered");
   return (
-    <div className="header flex justify-between shadow-md bg-orange-100">
+    <div className="header flex justify-between shadow-md">
       <div className="logo-container w-32">
         <Link to="/">
           <img
@@ -35,12 +40,14 @@ const Header = () => {
             <Link>Order</Link>
           </li>
           <button
+            className="shadow-lg p-2 rounded-md "
             onClick={() => {
               btnName === "Login" ? setBtnName("Logout") : setBtnName("Login");
             }}
           >
             {btnName}
           </button>
+          <li>Hello, {data.loggedInUser}</li>
         </ul>
       </div>
     </div>

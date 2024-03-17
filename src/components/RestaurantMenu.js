@@ -1,79 +1,62 @@
 import Shimmer from "./Shimmer";
 import { useParams } from "react-router-dom";
 import useRestaurantMenu from "../utilis/useRestaurantMenu";
+import MenuCategory from "./MenuCategory";
+import MenuList from "./MenuList";
 
 const RestaurantMenu = () => {
   const { resId } = useParams();
 
+  //fetch data using the custom hook
   const menuInfo = useRestaurantMenu(resId);
 
   if (menuInfo === null) return <Shimmer />;
-
-  //destructuring of fetched data to get restaurant name, cuisones etc
+  //destructure fetched data to get restaurant name, cuisines etc
   const {
     name: resName,
     costForTwoMessage,
     cuisines,
-  } = menuInfo?.data?.cards[0]?.card?.card?.info;
+  } = menuInfo?.cards[0]?.card?.card?.info;
 
-  //list of menu-item cards
-  const { cards } =
-    menuInfo?.data?.cards[2]?.groupedCard?.cardGroupMap?.REGULAR;
-
-  // console.log(cards);
+  //filter cards with "@type" of "NestedItemCategory" for creating menu category
+  const categories =
+    menuInfo?.cards[2]?.groupedCard?.cardGroupMap?.REGULAR?.cards?.filter(
+      (category) =>
+        category?.card?.card?.["@type"].toLowerCase().includes("itemcategory")
+    );
+  // console.log(categories)
 
   return (
-    <div>
+    <>
       <div className="rest-info">
-        <h1>{resName}</h1>
+        <h1 className="font-semibold text-xl mt-5">{resName}</h1>
         <p>
           {cuisines.join(", ")} - {costForTwoMessage}
         </p>
       </div>
 
-      <div className="rest-menu">
-        <ul>
-          {cards?.map((cardItem) => {
-            return (
-              <li>
-                {cardItem?.card?.card?.title}
-                <ul>
-                  {cardItem?.card?.card?.categories?.map((categories) => {
-                    return (
-                      <li>
-                        {categories?.title}
-                        <ul>
-                          {categories?.itemCards.map((itemCards) => {
-                            return (
-                              <li key={itemCards?.card?.info?.id}>
-                                {itemCards?.card?.info?.name}{" "}
-                                <span className="menu-item-price">
-                                  Rs.{itemCards?.card?.info?.price / 100}
-                                </span>{" "}
-                              </li>
-                            );
-                          })}
-                        </ul>
-                      </li>
-                    );
-                  })}
-                </ul>
-              </li>
-            );
-          })}
+      <hr className="m-10" />
 
-          {/* <h3>{menuInfo?.data?.cards[0]?.card?.card?.info?.name}</h3> */}
+      <div className="menu-section w-7/12 m-auto">
+        {categories?.map((category) => {
+          // console.log(category?.card?.card?.itemCards)
 
-          {cards.map((items) => {
-            <>
-              <li key={items?.card?.info?.id}>
-                {items?.card?.info?.name} - Rs.{items?.card?.info?.price / 100}
-              </li>
-            </>;
-          })}
-        </ul>
+          return (
+            <div
+              key={category?.card?.card?.title}
+              className="menu-wrapper my-5 bg-slate-200 p-3 rounded-md "
+            >
+              {/* condition to check if MenuCategory present or not */}
+              {category?.card?.card?.categories === undefined ? (
+                <MenuList data={category?.card?.card} />
+              ) : (
+                <MenuCategory data={category?.card?.card} />
+              )}
+            </div>
+          );
+        })}
       </div>
-    </div>
+    </>
   );
 };
 
