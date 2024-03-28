@@ -30,16 +30,20 @@ const MenuVariety = (props) => {
         </div>
 
         <div className="image-container w-[8rem] h-[7rem] shrink-0 rounded-lg overflow-hidden relative">
-          <button className="bg-black text-white p-1 rounded-lg absolute left-1/2 -translate-x-1/2 ">Add +</button>
-          <img
-            className="object-cover w-[100%] h-[100%]"
-            src={
-              IMAGE_URL +
-              "w_208,h_208,c_fit/" +
-              props?.data?.card?.info?.imageId
-            }
-            alt={props?.data?.card?.info?.name + " img"}
-          />
+          <button className="bg-black text-white p-1 rounded-lg absolute left-1/2 -translate-x-1/2 ">
+            Add +
+          </button>
+          {/* //if imgId exists display else don't */}
+          {props?.data?.card?.info?.imageId && (
+            <img
+              className="object-cover w-[100%] h-[100%]"
+              src={
+                IMAGE_URL +
+                "w_208,h_208,c_fit/" +
+                props?.data?.card?.info?.imageId
+              }
+            />
+          )}
           {/* {console.log(props?.data?.card?.info?.imageId)} */}
         </div>
       </div>
