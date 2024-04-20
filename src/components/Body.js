@@ -15,21 +15,22 @@ const Body = () => {
     // console.log("fetching data");
   }, []);
 
+  //fetching restaurant data
   const fetchData = async () => {
     const data = await fetch(
       "https://www.swiggy.com/dapi/restaurants/list/v5?lat=14.827476982708651&lng=74.13284070789814&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
     );
     const json = await data.json();
-    console.log(json);
+    // console.log(json);
 
     //fetch data that won't be modified
     setListOfRestaurants(
-      json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants
+      json?.data?.cards[3]?.card?.card?.gridElements?.infoWithStyle?.restaurants
     );
 
-    //copy of fetch data that will be used for state modification
+    //copy of fetch data that will be used for searching and filtering
     setFilteredRestaurants(
-      json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants
+      json?.data?.cards[3]?.card?.card?.gridElements?.infoWithStyle?.restaurants
     );
   };
 
@@ -40,6 +41,7 @@ const Body = () => {
   } else {
     return (
       <div className="body">
+        {/* search & filter section */}
         <div className="filter-section  p-2 ">
           <input
             type="text"
@@ -90,6 +92,7 @@ const Body = () => {
           </button>
         </div>
 
+            {/* restaurant display section */}
         <div className="res-container flex flex-wrap gap-5">
           {filteredRestaurants?.map((restaurant) => (
             <Link

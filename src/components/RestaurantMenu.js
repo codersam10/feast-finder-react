@@ -11,16 +11,17 @@ const RestaurantMenu = () => {
   const menuInfo = useRestaurantMenu(resId);
 
   if (menuInfo === null) return <Shimmer />;
+ 
   //destructure fetched data to get restaurant name, cuisines etc
   const {
     name: resName,
     costForTwoMessage,
     cuisines,
-  } = menuInfo?.cards[0]?.card?.card?.info;
+  } = menuInfo?.cards[2]?.card?.card?.info;
 
   //filter cards with "@type" of "NestedItemCategory" for creating menu category
   const categories =
-    menuInfo?.cards[2]?.groupedCard?.cardGroupMap?.REGULAR?.cards?.filter(
+    menuInfo?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards?.filter(
       (category) =>
         category?.card?.card?.["@type"].toLowerCase().includes("itemcategory")
     );
