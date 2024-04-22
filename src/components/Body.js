@@ -93,7 +93,7 @@ const Body = () => {
         </div>
 
             {/* restaurant display section */}
-        <div className="res-container flex flex-wrap gap-5">
+        <div className="res-container flex flex-wrap gap-5 justify-center">
           {filteredRestaurants?.map((restaurant) => (
             <Link
               key={restaurant.info.id}
