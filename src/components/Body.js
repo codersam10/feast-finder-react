@@ -30,7 +30,7 @@ const Body = () => {
 
     //copy of fetch data that will be used for searching and filtering
     setFilteredRestaurants(
-      json?.data?.cards[3]?.card?.card?.gridElements?.infoWithStyle?.restaurants
+      json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants
     );
   };
 
@@ -92,14 +92,13 @@ const Body = () => {
           </button>
         </div>
 
-            {/* restaurant display section */}
+        {/* restaurant display section */}
         <div className="res-container flex flex-wrap gap-5 justify-center">
           {filteredRestaurants?.map((restaurant) => (
             <Link
               key={restaurant.info.id}
               to={"/restaurant/" + restaurant.info.id}
             >
-
               {/* opened not-opened functionality */}
               {restaurant?.info?.availability?.opened ? (
                 <OpenedCard restData={restaurant} />
