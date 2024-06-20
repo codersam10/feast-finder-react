@@ -6,7 +6,6 @@ import Body from "./components/Body";
 import Contact from "./components/Contact";
 import About from "./components/About";
 import Error from "./components/Error";
-import RestaurantMenu from "./components/RestaurantMenu";
 import UserContext from "./utilis/UserContext";
 import { Provider } from "react-redux";
 import appStore from "./utilis/appStore";
