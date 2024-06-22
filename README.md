@@ -1,6 +1,6 @@
 # Project Name
 
-Swiggy Clone Project
+Feast Finder App
 
 ## Installation
 
@@ -13,7 +13,12 @@ Swiggy Clone Project
 2. Open your browser and go to  `http://localhost:3000`  to view the application
 
 ## Features
-- ...
+- User Interface:
+- Responsive design for optimal viewing on different devices.
+- Clean and intuitive navigation.
+- Easy-to-use interface with clear labels and instructions.
+- Allows users to navigate between different pages (About, Contact, Restaurant, Grocery).
+- Provides functionality for displaying menu items and their varieties.
 
 ## Technologies Used
 
