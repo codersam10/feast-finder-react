@@ -5,4 +5,4 @@ export const IMAGE_URL =
   "https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,";
 
 export const resMenuAPI =
-  "https://www.swiggy.com/dapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=14.827476982708651&lng=74.13284070789814&restaurantId=";
+  "https://proxy.cors.sh/https://www.swiggy.com/dapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=14.827476982708651&lng=74.13284070789814&restaurantId=";
