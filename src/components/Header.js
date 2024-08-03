@@ -10,9 +10,7 @@ const Header = () => {
   const onlineStatus = useOnlineStatus();
 
   const data = useContext(UserContext);
-  // console.log(data.loggedInUser)
 
-  console.log("header rendered");
   return (
     <div className="header flex justify-between shadow-md">
       <div className="logo-container w-32">

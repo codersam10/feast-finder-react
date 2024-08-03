@@ -25,7 +25,6 @@ const RestaurantMenu = () => {
       (category) =>
         category?.card?.card?.["@type"].toLowerCase().includes("itemcategory")
     );
-  // console.log(categories)
 
   return (
     <>
@@ -40,7 +39,6 @@ const RestaurantMenu = () => {
 
       <div className="menu-section w-7/12 m-auto">
         {categories?.map((category) => {
-          // console.log(category?.card?.card?.itemCards)
 
           return (
             <div

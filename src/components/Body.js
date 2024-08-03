@@ -12,7 +12,6 @@ const Body = () => {
 
   useEffect(() => {
     fetchData();
-    // console.log("fetching data");
   }, []);
 
   //fetching restaurant data
@@ -21,7 +20,6 @@ const Body = () => {
       "https://proxy.cors.sh/https://www.swiggy.com/dapi/restaurants/list/v5?lat=14.827476982708651&lng=74.13284070789814&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
     );
     const json = await data.json();
-    console.log(json);
 
     //fetch data that won't be modified
     setListOfRestaurants(
@@ -35,7 +33,6 @@ const Body = () => {
   };
 
   //conditional rendering
-  console.log("body rendered");
   if (listOfRestaurants?.length === 0) {
     return <Shimmer />;
   } else {

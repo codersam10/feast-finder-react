@@ -1,7 +1,6 @@
 import MenuVariety from "./MenuVariety";
 import { useState } from "react";
 const MenuList = (props) => {
-  //   console.log(props?.data[0])
   const [showMenu, setShowMenu] = useState(false);
   //show and hide menu feature
   const handleClick = () => {
@@ -20,7 +19,6 @@ const MenuList = (props) => {
 
       <ul className="menu-variety">
         {props?.data?.itemCards?.map((itemCard) => {
-          // console.log(itemCard?.card?.info?.id)
           return (
             <li key={itemCard?.card?.info?.id}>
               {showMenu && (

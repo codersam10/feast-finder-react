@@ -2,7 +2,6 @@ import { useState } from "react";
 import MenuList from "./MenuList";
 
 const MenuCategory = (props) => {
-  // console.log(props.data);
 
   const [expandIcon, setExpandIcon] = useState("expand_more");
   return (

@@ -1,7 +1,6 @@
 import { IMAGE_URL } from "../utilis/constants";
 
 const MenuVariety = (props) => {
-  // console.log(props)
   return (
     <>
       <div className="menu-variety-info flex justify-between rounded-md bg-slate-50 m-2 p-3 ">
@@ -23,7 +22,6 @@ const MenuVariety = (props) => {
             </span>
           )}
 
-          {/* {console.log(props?.data?.card?.info?.description)} */}
           <p className="text-xs text-gray-500">
             {props?.data?.card?.info?.description}
           </p>
@@ -44,7 +42,6 @@ const MenuVariety = (props) => {
               }
             />
           )}
-          {/* {console.log(props?.data?.card?.info?.imageId)} */}
         </div>
       </div>
     </>
