@@ -12,7 +12,7 @@ const Header = () => {
   const data = useContext(UserContext);
 
   return (
-    <div className="header flex justify-between shadow-md">
+    <div className="header sticky top-0 z-10 flex justify-between shadow-md bg-white">
       <div className="logo-container w-32">
         <Link to="/">
           <img
