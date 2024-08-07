@@ -9,6 +9,7 @@ import Error from "./components/Error";
 import UserContext from "./utilis/UserContext";
 import { Provider } from "react-redux";
 import appStore from "./utilis/appStore";
+import Cart from "./components/Cart";
 
 const Grocery = lazy(() => import("./components/Grocery"));
 const RestaurantMenu = lazy(() => import("./components/RestaurantMenu"));
@@ -59,6 +60,10 @@ const appRouter = createBrowserRouter([
           </Suspense>
         ),
       },
+      {
+        path:"/cart",
+        element:<Cart/>
+      }
     ],
 
     errorElement: <Error />,

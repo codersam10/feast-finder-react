@@ -17,12 +17,24 @@ const MenuVariety = (props) => {
           </p>
 
           {/* conditional rendering of review */}
-          {props?.data?.card?.info?.ratings?.aggregatedRating?.rating && (
+          {props?.data?.card?.info?.ratings?.aggregatedRating?.rating ? (
             <span className="inline-block text-sm text-white font-medium bg-lime-600 p-0.5 px-2 rounded-md">
               <div className="flex gap-1 items-center">
                 <span>
                   {props?.data?.card?.info?.ratings?.aggregatedRating?.rating}
                 </span>
+                <span>
+                  <img
+                    src={star}
+                    alt="star-icon"
+                  />
+                </span>
+              </div>
+            </span>
+          ) : (
+            <span className="inline-block text-sm text-white font-medium bg-lime-600 p-0.5 px-2 rounded-md">
+              <div className="flex gap-1 items-center">
+                <span>0.0</span>
                 <span>
                   <img
                     src={star}
@@ -47,6 +59,8 @@ const MenuVariety = (props) => {
 
             <img
               className="object-cover object-center w-[100%] h-[100%]"
+              loading="lazy"
+              alt="menu food image"
               src={
                 IMAGE_URL +
                 "w_208,h_208,c_fit/" +

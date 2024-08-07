@@ -15,8 +15,8 @@ class UserClass extends React.Component {
           }}
         </UserContext.Consumer>
 
-        <h3>Qualification: Expert Frontend Dev</h3>
-        <h3>Hobby: Managing Investments</h3>
+        <h3>Qualification:Frontend Dev</h3>
+        <h3>Skills: ReactJS, Javascript ES6, CSS, HTML5, Tailwind CSS, Git & Gihtub, NodeJS... </h3>
       </>
     );
   }

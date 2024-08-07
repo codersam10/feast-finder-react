@@ -24,24 +24,23 @@ const Header = () => {
       </div>
       <div className="nav-items pr-3">
         <ul className="flex items-center h-[100%] gap-6">
-          <li>Status: {onlineStatus === false ? "🔴" : "🟢"}</li>
-          <li>
-            <Link to="/about">About</Link>
-          </li>
-          <li>
-            <Link to="/contact">Contact</Link>
-          </li>
-          <li>
-            <Link to="/grocery">Grocery</Link>
-          </li>
-          <li>
-            <Link>Order</Link>
-          </li>
+          <li> {onlineStatus === false ? "🔴Offline" : "🟢Online"}</li>
+          <Link to="/about">
+            <li className="hover:text-slate-600">About</li>
+          </Link>
+          <Link to="/contact">
+            <li className="hover:text-slate-600">Contact</li>
+          </Link>
+          <Link to="/grocery">
+            <li className="hover:text-slate-600">Grocery</li>
+          </Link>
+          <Link to="/cart"><li className="hover:text-slate-600">Cart</li></Link>
+
           <button
-            className="shadow-lg p-2 rounded-md "
+            className="shadow-lg p-2 rounded-md"
             onClick={() => {
               btnName === "Login" ? setBtnName("Logout") : setBtnName("Login");
-            }}
+            }} 
           >
             {btnName}
           </button>
