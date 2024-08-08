@@ -2,12 +2,11 @@ import RestaurantCard, { withOpenedCard } from "./RestaurantCard";
 import { useState, useEffect } from "react";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
+import FilterSection from "./FilterSection";
 
 const Body = () => {
   const [listOfRestaurants, setListOfRestaurants] = useState([]);
   const [filteredRestaurants, setFilteredRestaurants] = useState([]);
-  const [searchText, setSearchText] = useState([]);
-
   const OpenedCard = withOpenedCard(RestaurantCard);
 
   useEffect(() => {
@@ -24,7 +23,7 @@ const Body = () => {
 
       //fetch data that won't be modified
       setListOfRestaurants(
-        json?.data?.cards[3]?.card?.card?.gridElements?.infoWithStyle
+        json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle
           ?.restaurants
       );
 
@@ -38,64 +37,19 @@ const Body = () => {
     }
   };
 
-  //conditional rendering
-  if (listOfRestaurants?.length === 0) {
-    return <Shimmer />;
-  } else {
-    return (
+  return (
+    //conditional rendering
+    listOfRestaurants?.length === 0 ? (
+      <Shimmer />
+    ) : (
       <div className="body">
         {/* search & filter section */}
-        <div className="filter-section  p-2 ">
-          <input
-            type="text"
-            className="search-box shadow-lg p-3 rounded-md"
-            placeholder="Search..."
-            value={searchText}
-            onChange={(e) => setSearchText(e.target.value)}
-            onKeyDown={(e) => {
-              if (e.key === "Enter") {
-                const filteredList = listOfRestaurants.filter((res) =>
-                  res.info.name.toLowerCase().includes(searchText.toLowerCase())
-                );
+        <FilterSection
+          setFilteredRestaurants={setFilteredRestaurants}
+          listOfRestaurants={listOfRestaurants}
+        />
 
-                setFilteredRestaurants(filteredList);
-              }
-            }}
-          />
-          <button
-            className="search-button ml-4 shadow-xl p-3 rounded-md"
-            onClick={() => {
-              const filteredList = listOfRestaurants.filter((res) =>
-                res.info.name.toLowerCase().includes(searchText.toLowerCase())
-              );
-
-              setFilteredRestaurants(filteredList);
-            }}
-          >
-            Search
-          </button>
-
-          <button
-            className="filter-btn ml-4 shadow-lg p-3 rounded-md"
-            onClick={() => {
-              const filteredList = listOfRestaurants.filter(
-                (res) => res.info.avgRating < 4
-              );
-              setFilteredRestaurants(filteredList);
-            }}
-          >
-            Rated below 4
-          </button>
-
-          <button
-            className="show-all ml-4 shadow-lg p-3 rounded-md"
-            onClick={() => setFilteredRestaurants(listOfRestaurants)}
-          >
-            Show All
-          </button>
-        </div>
-
-        {/* restaurant display section */}
+        {/* restaurants display section */}
         <div className="res-container flex flex-wrap gap-5 justify-center">
           {filteredRestaurants?.map((restaurant) => (
             <Link
@@ -112,7 +66,8 @@ const Body = () => {
           ))}
         </div>
       </div>
-    );
-  }
+    )
+  );
 };
+
 export default Body;
