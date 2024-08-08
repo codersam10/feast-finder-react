@@ -19,10 +19,11 @@ const FilterSection = ({ listOfRestaurants, setFilteredRestaurants }) => {
       >
         <input
           type="text"
-          className="search-box p-3"
+          className="search-box p-3 focus:outline-none"
           placeholder="Search restaurant..."
           value={searchText}
           onChange={(e) => setSearchText(e.target.value)}
+          autoFocus
         />
         <button
           type="submit"
