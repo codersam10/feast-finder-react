@@ -1,32 +1,19 @@
-import { useState } from "react";
 import MenuList from "./MenuList";
 
 const MenuCategory = (props) => {
-
-  const [expandIcon, setExpandIcon] = useState("expand_more");
   return (
     <>
-      <div className="menu-category-info flex justify-between">
-        <span className="text-2xl font-bold">
-          {props?.data?.title} ({props?.data?.categories?.length})
-        </span>
-        <span
-          className="material-symbols-outlined cursor-pointer"
-          onClick={() => {
-            expandIcon === "expand_more"
-              ? setExpandIcon("expand_less")
-              : setExpandIcon("expand_more");
-          }}
-        >
-          {expandIcon}
-        </span>
-      </div>
+      <h1 className="menu-category-info flex justify-between text-3xl font-bold p-2">
+        {props?.data?.title}
+      </h1>
+
+      <hr className="border-t-2 border-dashed border-gray-300 mx-2"/>
 
       <ul className="menu-list">
         {props?.data?.categories?.map((category) => {
           return (
-            <li>
-              <MenuList key={category?.title} data={category} />
+            <li key={category?.title}>
+              <MenuList data={category} />
             </li>
           );
         })}
