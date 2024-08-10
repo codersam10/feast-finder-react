@@ -1,4 +1,4 @@
-import { LOGO_URL } from "../utilis/constants";
+import logo from "../assets/logo.png";
 import { useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import useOnlineStatus from "../utilis/useOnlineStatus";
@@ -12,11 +12,11 @@ const Header = () => {
   const data = useContext(UserContext);
 
   return (
-    <div className="header sticky top-0 z-10 flex justify-between shadow-md bg-white">
+    <div className="header sticky top-0 z-10 bg-[hsla(0,0%,100%,0.9)]  backdrop-blur-xl flex justify-between shadow-md ">
       <div className="logo-container w-32">
         <Link to="/">
           <img
-            src={LOGO_URL}
+            src={logo}
             alt="logo"
             className="logo"
           ></img>
@@ -34,13 +34,15 @@ const Header = () => {
           <Link to="/grocery">
             <li className="hover:text-slate-600">Grocery</li>
           </Link>
-          <Link to="/cart"><li className="hover:text-slate-600">Cart</li></Link>
+          <Link to="/cart">
+            <li className="hover:text-slate-600">Cart</li>
+          </Link>
 
           <button
             className="shadow-lg p-2 rounded-md"
             onClick={() => {
               btnName === "Login" ? setBtnName("Logout") : setBtnName("Login");
-            }} 
+            }}
           >
             {btnName}
           </button>

@@ -19,6 +19,7 @@ const FilterSection = ({ listOfRestaurants, setFilteredRestaurants }) => {
       >
         <input
           type="text"
+          name="search-text"
           className="search-box p-3 focus:outline-none"
           placeholder="Search restaurant..."
           value={searchText}

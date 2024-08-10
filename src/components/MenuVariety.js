@@ -53,7 +53,7 @@ const MenuVariety = (props) => {
       {/* if imgId exists display else don't */}
       {props?.data?.card?.info?.imageId && (
         <div className="image-container w-[9rem] h-[7rem] shrink-0 rounded-lg overflow-hidden relative">
-          <button className="bg-slate-900 text-white p-1 rounded-lg absolute left-1/2 -translate-x-1/2 hover:bg-slate-700">
+          <button className="bg-slate-900 text-white font-bold p-1 rounded-lg absolute left-1/2 -translate-x-1/2 hover:bg-slate-700 active:bg-slate-900">
             Add +
           </button>
 

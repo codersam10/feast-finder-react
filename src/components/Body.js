@@ -26,14 +26,14 @@ const Body = () => {
         json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle
           ?.restaurants
       );
-
+        
       //copy of fetch data that will be used for searching and filtering
       setFilteredRestaurants(
         json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle
           ?.restaurants
       );
     } catch (error) {
-      alert(error);
+      console.error(error);
     }
   };
 
