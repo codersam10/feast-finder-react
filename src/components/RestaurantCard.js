@@ -13,7 +13,7 @@ const RestaurantCard = (props) => {
     <div className="res-card w-72 rounded-xl shadow-md hover:shadow-xl overflow-hidden">
       <div className="img-container h-40 overflow-hidden">
         <img
-          src={IMAGE_URL + "w_660/" + imageId}
+          src={`${IMAGE_URL}w_660/${imageId}`}
           loading="lazy"
           alt="restaurant image"
           className="res-card-hover: res-img object-cover object-center w-[100%] h-[100%] hover:scale-110 duration-200"

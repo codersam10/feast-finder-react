@@ -16,9 +16,7 @@ const Body = () => {
   //fetching restaurant data
   const fetchData = async () => {
     try {
-      const data = await fetch(
-        "https://thingproxy.freeboard.io/fetch/https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.96340&lng=77.58550&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
-      );
+      const data = await fetch("/restaurant-list/");
       const json = await data.json();
 
       //fetch data that won't be modified
@@ -26,7 +24,7 @@ const Body = () => {
         json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle
           ?.restaurants
       );
-        
+
       //copy of fetch data that will be used for searching and filtering
       setFilteredRestaurants(
         json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle
