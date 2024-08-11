@@ -15,12 +15,12 @@ const FilterSection = ({ listOfRestaurants, setFilteredRestaurants }) => {
     <div className="filter-section p-2">
       <form
         onSubmit={searchFilteredList}
-        className="shadow-lg rounded-lg overflow-hidden inline-block"
+        className="shadow-lg rounded-lg inline-block"
       >
         <input
           type="text"
           name="search-text"
-          className="search-box p-3 focus:outline-none"
+          className="search-box p-3 focus:outline-none rounded-l-lg"
           placeholder="Search restaurant..."
           value={searchText}
           onChange={(e) => setSearchText(e.target.value)}
@@ -28,7 +28,7 @@ const FilterSection = ({ listOfRestaurants, setFilteredRestaurants }) => {
         />
         <button
           type="submit"
-          className="search-button p-3 bg-blue-600 text-white"
+          className="search-button p-3 bg-blue-600 text-white rounded-r-lg"
         >
           Search
         </button>
