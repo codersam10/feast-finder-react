@@ -5,9 +5,9 @@
   "scripts": {
     "start": "parcel ./src/index.html",
     "build": "parcel build ./src/index.html",
+    "postbuild": "copyfiles _redirects dist",
     "test": "jest",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
+    "predeploy": "npm run build"
   },
   "repository": {
     "type": "git",
@@ -27,7 +27,7 @@
     "react-router-dom": "^6.22.1"
   },
   "devDependencies": {
-    "gh-pages": "^6.1.1",
+    "copyfiles": "^2.4.1",
     "parcel": "^2.11.0",
     "process": "^0.11.10",
     "tailwindcss": "^3.4.1"
