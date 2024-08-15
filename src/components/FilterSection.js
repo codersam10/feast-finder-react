@@ -12,7 +12,7 @@ const FilterSection = ({ listOfRestaurants, setFilteredRestaurants }) => {
     setFilteredRestaurants(filteredList);
   };
   return (
-    <div className="filter-section p-2">
+    <div className="filter-section p-2 flex flex-wrap gap-3">
       <form
         onSubmit={searchFilteredList}
         className="shadow-lg rounded-lg inline-block"
@@ -35,7 +35,7 @@ const FilterSection = ({ listOfRestaurants, setFilteredRestaurants }) => {
       </form>
 
       <button
-        className="filter-btn ml-4 shadow-lg p-3 rounded-md"
+        className="filter-btn shadow-lg p-3 rounded-md"
         onClick={() => {
           const filteredList = listOfRestaurants.filter(
             (res) => res.info.avgRating < 4
@@ -47,7 +47,7 @@ const FilterSection = ({ listOfRestaurants, setFilteredRestaurants }) => {
       </button>
 
       <button
-        className="show-all ml-4 shadow-lg p-3 rounded-md"
+        className="show-all shadow-lg p-3 rounded-md"
         onClick={() => setFilteredRestaurants(listOfRestaurants)}
       >
         Show All

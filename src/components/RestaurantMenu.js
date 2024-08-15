@@ -37,7 +37,7 @@ const RestaurantMenu = () => {
 
       <hr className="m-10" />
 
-      <div className="menu-section w-7/12 m-auto">
+      <div className="menu-section mx-auto p-4 w-full md:w-7/12">
         {categories?.map((category) => {
 
           return (
