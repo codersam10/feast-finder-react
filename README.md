@@ -13,12 +13,14 @@ Feast Finder App
 2. Open your browser and go to  `http://localhost:3000`  to view the application
 
 ## Features
-- User Interface:
+- Fetches dynamic data with the help of REST API's.
+- Has search and filter functionality for better user experience.
 - Responsive design for optimal viewing on different devices.
+- Hamburger menu for mobile friendly layout.
 - Clean and intuitive navigation.
 - Easy-to-use interface with clear labels and instructions.
-- Allows users to navigate between different pages (About, Contact, Restaurant, Grocery).
-- Provides functionality for displaying menu items and their varieties.
+- Allows users to navigate between different pages.
+- Provides accordion functionality for displaying menu items and their varieties.
 
 ## Technologies Used
 
