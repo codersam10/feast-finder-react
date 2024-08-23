@@ -44,16 +44,9 @@ const Header = () => {
               <Link to="/cart">
                 <li className="hover:text-slate-600">Cart</li>
               </Link>
-              <button
-                className="shadow-lg p-2 rounded-md"
-                onClick={() => {
-                  btnName === "Login"
-                    ? setBtnName("Logout")
-                    : setBtnName("Login");
-                }}
-              >
-                {btnName}
-              </button>
+              <Link to="/signup">
+                <button className="shadow-lg p-2 rounded-md">Login</button>
+              </Link>
             </div>
           </div>
 
@@ -90,7 +83,11 @@ const Header = () => {
           </button>
 
           {/* hamburger menu */}
-          <div className={`${isOpen ? "block" : "hidden"} absolute top-full w-1/2 right-0 z-10`}>
+          <div
+            className={`${
+              isOpen ? "block" : "hidden"
+            } absolute top-full w-1/2 right-0 z-10`}
+          >
             <div className="flex flex-col gap-5 bg-[hsla(0,0%,100%,0.9)] text-center border-2 border-slate-500 md:hidden p-4 rounded-lg">
               <Link to="/about">
                 <li className="hover:text-slate-600">About</li>
@@ -104,19 +101,11 @@ const Header = () => {
               <Link to="/cart">
                 <li className="hover:text-slate-600">Cart</li>
               </Link>
-              <button
-                className="shadow-lg p-2 rounded-md"
-                onClick={() => {
-                  btnName === "Login"
-                    ? setBtnName("Logout")
-                    : setBtnName("Login");
-                }}
-              >
-                {btnName}
-              </button>
+              <Link to="/signup">
+                <button className="shadow-lg p-2 rounded-md">Login</button>
+              </Link>
             </div>
           </div>
-
         </ul>
       </div>
     </div>

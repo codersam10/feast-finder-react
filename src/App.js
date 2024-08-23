@@ -10,6 +10,8 @@ import UserContext from "./utilis/UserContext";
 import { Provider } from "react-redux";
 import appStore from "./utilis/appStore";
 import Cart from "./components/Cart";
+import Signup from "./components/Signup";
+import Signin from "./components/Signin";
 
 const Grocery = lazy(() => import("./components/Grocery"));
 const RestaurantMenu = lazy(() => import("./components/RestaurantMenu"));
@@ -61,13 +63,17 @@ const appRouter = createBrowserRouter([
         ),
       },
       {
-        path:"/cart",
-        element:<Cart/>
-      }
+        path: "/cart",
+        element: <Cart />,
+      },
     ],
-
     errorElement: <Error />,
   },
+  {
+    path: "/signup",
+    element: <Signup />,
+  },
+  { path: "/signin", element: <Signin /> },
 ]);
 
 const root = ReactDOM.createRoot(document.getElementById("root"));

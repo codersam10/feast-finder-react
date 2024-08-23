@@ -61,9 +61,7 @@ const MenuVariety = (props) => {
             className="object-cover object-center w-[100%] h-[100%]"
             loading="lazy"
             alt="menu food image"
-            src={
-              `${IMAGE_URL}w_208,h_208,c_fit/${props?.data?.card?.info?.imageId}`
-            }
+            src={`${IMAGE_URL}w_208,h_208,c_fit/${props?.data?.card?.info?.imageId}`}
           />
         </div>
       )}
