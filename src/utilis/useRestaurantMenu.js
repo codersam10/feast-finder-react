@@ -7,9 +7,14 @@ const useRestaurantMenu = (resId) => {
   }, []);
 
   const fetchData = async () => {
-    const data = await fetch(`/restaurant-menu-list/${resId}`);
-    const json = await data.json();
-    setMenuInfo(json.data);
+    try {
+      const data = await fetch(`/restaurant-menu-list/${resId}`);
+      if (!data.ok) {
+        throw new Error(`HTTP error! Status: ${data.status}`);
+      }
+      const json = await data.json();
+      setMenuInfo(json.data);
+    } catch (error) {}
   };
   return menuInfo;
 };

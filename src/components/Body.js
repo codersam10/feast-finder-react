@@ -17,6 +17,9 @@ const Body = () => {
   const fetchData = async () => {
     try {
       const data = await fetch("/restaurant-list/");
+      if (!data.ok) {
+        throw new Error(`HTTP error! Status: ${data.status}`);
+      }
       const json = await data.json();
 
       //fetch data that won't be modified
