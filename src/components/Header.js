@@ -5,11 +5,11 @@ import useOnlineStatus from "../utilis/useOnlineStatus";
 import UserContext from "../utilis/UserContext";
 
 const Header = () => {
-  const [btnName, setBtnName] = useState("Login");
-  const [isOpen, setIsOpen] = useState(false);
+  const [isSignedIn, setisSignedIn] = useState(false);
+  const [hamburgerOpen, setHamburgerOpen] = useState(false);
 
   const handleHamburgerClick = () => {
-    setIsOpen(!isOpen);
+    setHamburgerOpen(!hamburgerOpen);
   };
 
   const onlineStatus = useOnlineStatus();
@@ -17,7 +17,7 @@ const Header = () => {
   const data = useContext(UserContext);
 
   return (
-    <div className="header sticky top-0 z-10 bg-[hsla(0,0%,100%,0.9)]  backdrop-blur-xl flex justify-between shadow-md ">
+    <div className="header sticky top-0 z-10 bg-[hsla(0,0%,100%,0.8)]  backdrop-blur-xl flex justify-between shadow-md ">
       <div className="logo-container w-32">
         <Link to="/">
           <img
@@ -45,7 +45,7 @@ const Header = () => {
                 <li className="hover:text-slate-600">Cart</li>
               </Link>
               <Link to="/signup">
-                <button className="shadow-lg p-2 rounded-md">Login</button>
+                <button className="shadow-lg p-2 rounded-md">Sign Up</button>
               </Link>
             </div>
           </div>
@@ -58,7 +58,7 @@ const Header = () => {
             onClick={handleHamburgerClick}
             className=" text-gray-500 md:hidden"
           >
-            {isOpen ? (
+            {hamburgerOpen ? (
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 height="24px"
@@ -85,7 +85,7 @@ const Header = () => {
           {/* hamburger menu */}
           <div
             className={`${
-              isOpen ? "block" : "hidden"
+              hamburgerOpen ? "block" : "hidden"
             } absolute top-full w-1/2 right-0 z-10`}
           >
             <div className="flex flex-col gap-5 bg-[hsla(0,0%,100%,0.9)] text-center border-2 border-slate-500 md:hidden p-4 rounded-lg">
@@ -102,7 +102,7 @@ const Header = () => {
                 <li className="hover:text-slate-600">Cart</li>
               </Link>
               <Link to="/signup">
-                <button className="shadow-lg p-2 rounded-md">Login</button>
+                <button className="shadow-lg p-2 rounded-md">Sign Up</button>
               </Link>
             </div>
           </div>
