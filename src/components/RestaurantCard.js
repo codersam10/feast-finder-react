@@ -1,5 +1,8 @@
 import { IMAGE_URL } from "../utilis/constants";
+//svgs are imported as string
 import star from "../assets/star.svg";
+import tag from "../assets/tag.svg";
+
 const RestaurantCard = (props) => {
   const { restData } = props;
   const {
@@ -45,10 +48,20 @@ const RestaurantCard = (props) => {
 export const withOpenedCard = (RestaurantCard) => {
   return (props) => {
     return (
-      <>
-        <label>Opened</label>
+      <div className="relative">
+        <label className="z-10 rounded-tl-xl overflow-hidden absolute top-0 left-0 flex">
+          <span className=" text-xs px-2 py-1.5 bg-black text-white font-bold">
+            Open
+          </span>
+          <span>
+            <img
+              className="h-7"
+              src={tag}
+            />
+          </span>
+        </label>
         <RestaurantCard {...props} />
-      </>
+      </div>
     );
   };
 };
