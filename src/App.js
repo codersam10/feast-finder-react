@@ -1,4 +1,4 @@
-import React, { lazy, Suspense } from "react";
+import React, { lazy, StrictMode, Suspense } from "react";
 import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
 import Header from "./components/Header";
@@ -10,9 +10,10 @@ import UserContext from "./utilis/UserContext";
 import { Provider } from "react-redux";
 import appStore from "./utilis/appStore";
 import Cart from "./components/Cart";
-import Signup from "./components/Signup";
-import Signin from "./components/Signin";
+import SignUp from "./components/SignUp";
+import SignIn from "./components/SignIn";
 
+//React lazy loading implementation
 const Grocery = lazy(() => import("./components/Grocery"));
 const RestaurantMenu = lazy(() => import("./components/RestaurantMenu"));
 
@@ -26,6 +27,7 @@ const App = () => {
         </div>
       </UserContext.Provider>
     </Provider>
+    
   );
 };
 
@@ -71,11 +73,15 @@ const appRouter = createBrowserRouter([
   },
   {
     path: "/signup",
-    element: <Signup />,
+    element: <SignUp />,
   },
-  { path: "/signin", element: <Signin /> },
+  { path: "/signin", element: <SignIn /> },
 ]);
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
-root.render(<RouterProvider router={appRouter} />);
+root.render(
+  <StrictMode>
+    <RouterProvider router={appRouter} />
+  </StrictMode>
+);

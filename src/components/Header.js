@@ -1,12 +1,15 @@
-import logo from "../assets/logo.png";
-import { useState, useContext } from "react";
+import logo from "../assets/logo.svg";
+import { useState, useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
 import useOnlineStatus from "../utilis/useOnlineStatus";
 import UserContext from "../utilis/UserContext";
+import { auth, db } from "./Firebase";
+import { getDoc, doc } from "firebase/firestore";
 
 const Header = () => {
-  const [isSignedIn, setisSignedIn] = useState(false);
+  // const [isSignedIn, setisSignedIn] = useState(false);
   const [hamburgerOpen, setHamburgerOpen] = useState(false);
+  const [userDetails, setUserDetails] = useState(null);
 
   const handleHamburgerClick = () => {
     setHamburgerOpen(!hamburgerOpen);
@@ -16,9 +19,44 @@ const Header = () => {
 
   const data = useContext(UserContext);
 
+
+  const fetchUserData = async () => {
+    console.log("fetching user data...");
+    try {
+      auth.onAuthStateChanged(async (user) => {
+        console.log("user:", user);
+        if (!user) return;
+        const docRef = doc(db, "Users", user.uid);
+        const docSnap = await getDoc(docRef);
+        if (docSnap.exists()) {
+          setUserDetails(docSnap.data());
+          console.log("docsnap data:", docSnap.data());
+        } else {
+          console.log("User nt signed in");
+        }
+      });
+    } catch (error) {
+      console.error(error);
+    }
+
+  };
+  useEffect(() => {
+    fetchUserData();
+  },[]);
+
+  const handleSignOut = async () => {
+    try{
+      await auth.signOut();
+      setUserDetails(null);
+    alert('signed out!')
+    }catch(error){
+      console.error(`Error logging out: ${error}`)
+    }
+  }
+
   return (
-    <div className="header sticky top-0 z-10 bg-[hsla(0,0%,100%,0.8)]  backdrop-blur-xl flex justify-between shadow-md ">
-      <div className="logo-container w-32">
+    <div className="header sticky top-0 z-50 bg-[hsla(0,0%,100%,0.8)]  backdrop-blur-xl flex justify-between shadow-md ">
+      <div className="logo-container w-28 p-5">
         <Link to="/">
           <img
             src={logo}
@@ -29,7 +67,7 @@ const Header = () => {
       </div>
       <div className="nav-items pr-3">
         <ul className="items-center h-[100%] flex gap-6">
-          <li> {onlineStatus === false ? "🔴Offline" : "🟢Online"}</li>
+          <li> {onlineStatus ? "🟢Online" : "🔴Offline"}</li>
           <div className="hidden md:block">
             <div className="flex items-center gap-6">
               <Link to="/about">
@@ -44,13 +82,18 @@ const Header = () => {
               <Link to="/cart">
                 <li className="hover:text-slate-600">Cart</li>
               </Link>
+              
               <Link to="/signup">
                 <button className="shadow-lg p-2 rounded-md">Sign Up</button>
               </Link>
+              <button className="shadow-lg p-2 rounded-md" onClick={handleSignOut}>Sign out</button>
+
             </div>
           </div>
 
-          <li>Hello, {data.loggedInUser}</li>
+          <li>
+            Hello, {data.loggedInUser} {userDetails?.name}
+          </li>
 
           {/* hamburger btn */}
           <button
@@ -104,6 +147,8 @@ const Header = () => {
               <Link to="/signup">
                 <button className="shadow-lg p-2 rounded-md">Sign Up</button>
               </Link>
+              <button className="shadow-lg p-2 rounded-md" onClick={handleSignOut}>Sign out</button>
+
             </div>
           </div>
         </ul>
