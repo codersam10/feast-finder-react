@@ -51,7 +51,7 @@ const Body = () => {
         />
 
         {/* restaurants display section */}
-        <div className="res-container flex flex-wrap gap-5 justify-center w-[95%] mx-auto">
+        <div className="res-container flex flex-wrap gap-5 justify-center py-2.5 w-[95%] mx-auto">
           {filteredRestaurants?.map((restaurant) => (
             <Link
               key={restaurant.info.id}
