@@ -13,13 +13,13 @@ const RestaurantCard = (props) => {
     cloudinaryImageId: imageId,
   } = restData?.info;
   return (
-    <div className="res-card w-72 rounded-xl shadow-md hover:shadow-xl overflow-hidden">
+    <div className="res-card w-72 rounded-xl shadow-md overflow-hidden">
       <div className="img-container h-40 overflow-hidden">
         <img
           src={`${IMAGE_URL}w_660/${imageId}`}
           loading="lazy"
           alt="restaurant image"
-          className="res-card-hover: res-img object-cover object-center w-[100%] h-[100%] hover:scale-110 duration-200"
+          className="res-card-hover: res-img object-cover object-center w-[100%] h-[100%]"
         />
       </div>
 
@@ -48,9 +48,9 @@ const RestaurantCard = (props) => {
 export const withOpenedCard = (RestaurantCard) => {
   return (props) => {
     return (
-      <div className="relative">
+      <div className="relative hover:-translate-y-3 duration-[250ms]">
         <label className="z-10 rounded-tl-xl overflow-hidden absolute top-0 left-0 flex">
-          <span className=" text-xs px-2 py-1.5 bg-black text-white font-bold">
+          <span className="text-xs px-2 py-1.5 bg-black text-white font-bold">
             Open
           </span>
           <span>
