@@ -5,7 +5,7 @@
   "scripts": {
     "start": "parcel ./src/index.html",
     "build": "parcel build ./src/index.html",
-    "postbuild": "cp _redirects dist/",
+    "postbuild": "copyfiles _redirects dist/",
     "test": "jest",
     "predeploy": "npm run build"
   },
