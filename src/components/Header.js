@@ -24,13 +24,11 @@ const Header = () => {
     console.log("fetching user data...");
     try {
       auth.onAuthStateChanged(async (user) => {
-        console.log("user:", user);
         if (!user) return;
         const docRef = doc(db, "Users", user.uid);
         const docSnap = await getDoc(docRef);
         if (docSnap.exists()) {
           setUserDetails(docSnap.data());
-          console.log("docsnap data:", docSnap.data());
         } else {
           console.log("User nt signed in");
         }
