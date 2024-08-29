@@ -127,7 +127,7 @@ const Header = () => {
           <div
             className={`${
               hamburgerOpen ? "block" : "hidden"
-            } absolute top-full w-1/2 right-0 z-10`}
+            } absolute top-[120%] w-1/2 right-5 z-10`}
           >
             <div className="flex flex-col gap-5 bg-[hsla(0,0%,100%,0.9)] text-center border-2 border-slate-500 md:hidden p-4 rounded-lg">
               <Link to="/about">
@@ -143,7 +143,7 @@ const Header = () => {
                 <li className="hover:text-slate-600">Cart</li>
               </Link>
               <Link to="/signup">
-                <button className="shadow-lg p-2 rounded-md">Sign Up</button>
+                <button className="shadow-lg p-2 rounded-md w-full">Sign Up</button>
               </Link>
               <button className="shadow-lg p-2 rounded-md" onClick={handleSignOut}>Sign out</button>
 
