@@ -5,11 +5,14 @@ import useOnlineStatus from "../utilis/useOnlineStatus";
 import UserContext from "../utilis/UserContext";
 import { auth, db } from "./Firebase";
 import { getDoc, doc } from "firebase/firestore";
+import { useSelector } from "react-redux";
 
 const Header = () => {
-  // const [isSignedIn, setisSignedIn] = useState(false);
   const [hamburgerOpen, setHamburgerOpen] = useState(false);
   const [userDetails, setUserDetails] = useState(null);
+
+  // subscribing to cart from redux store
+  const cartItems = useSelector((store) => store.cart.items);
 
   const handleHamburgerClick = () => {
     setHamburgerOpen(!hamburgerOpen);
@@ -18,7 +21,6 @@ const Header = () => {
   const onlineStatus = useOnlineStatus();
 
   const data = useContext(UserContext);
-
 
   const fetchUserData = async () => {
     console.log("fetching user data...");
@@ -36,21 +38,20 @@ const Header = () => {
     } catch (error) {
       console.error(error);
     }
-
   };
   useEffect(() => {
     fetchUserData();
-  },[]);
+  }, []);
 
   const handleSignOut = async () => {
-    try{
+    try {
       await auth.signOut();
       setUserDetails(null);
-    alert('signed out!')
-    }catch(error){
-      console.error(`Error logging out: ${error}`)
+      alert("signed out!");
+    } catch (error) {
+      console.error(`Error logging out: ${error}`);
     }
-  }
+  };
 
   return (
     <div className="header sticky top-0 z-50 bg-[hsla(0,0%,100%,0.8)]  backdrop-blur-xl flex justify-between shadow-md ">
@@ -78,14 +79,20 @@ const Header = () => {
                 <li className="hover:text-slate-600">Grocery</li>
               </Link>
               <Link to="/cart">
-                <li className="hover:text-slate-600">Cart</li>
+                <li className="hover:text-slate-600">
+                  Cart({cartItems?.length})
+                </li>
               </Link>
-              
+
               <Link to="/signup">
                 <button className="shadow-lg p-2 rounded-md">Sign Up</button>
               </Link>
-              <button className="shadow-lg p-2 rounded-md" onClick={handleSignOut}>Sign out</button>
-
+              <button
+                className="shadow-lg p-2 rounded-md"
+                onClick={handleSignOut}
+              >
+                Sign out
+              </button>
             </div>
           </div>
 
@@ -140,13 +147,19 @@ const Header = () => {
                 <li className="hover:text-slate-600">Grocery</li>
               </Link>
               <Link to="/cart">
-                <li className="hover:text-slate-600">Cart</li>
+                <li className="hover:text-slate-600">Cart({cartItems?.length})</li>
               </Link>
               <Link to="/signup">
-                <button className="shadow-lg p-2 rounded-md w-full">Sign Up</button>
+                <button className="shadow-lg p-2 rounded-md w-full">
+                  Sign Up
+                </button>
               </Link>
-              <button className="shadow-lg p-2 rounded-md" onClick={handleSignOut}>Sign out</button>
-
+              <button
+                className="shadow-lg p-2 rounded-md"
+                onClick={handleSignOut}
+              >
+                Sign out
+              </button>
             </div>
           </div>
         </ul>

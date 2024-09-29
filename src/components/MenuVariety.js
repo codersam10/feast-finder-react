@@ -1,7 +1,12 @@
 import { IMAGE_URL } from "../utilis/constants";
 import star from "../assets/star.svg";
-
+import { addItem } from "../utilis/cartSlice";
+import { useDispatch } from "react-redux";
 const MenuVariety = (props) => {
+  const dispatch = useDispatch();
+  const handleAddItem = () => {
+    dispatch(addItem(props?.data?.card?.info));
+  };
   return (
     <>
       <div className="food-item-info">
@@ -50,19 +55,22 @@ const MenuVariety = (props) => {
         </p>
       </div>
 
-      {/* if imgId exists display else don't */}
+      {/* if imgId exists, display else don't */}
       {props?.data?.card?.info?.imageId && (
-        <div className="image-container w-[9rem] h-[7rem] shrink-0 rounded-lg overflow-hidden relative">
-          <button className="bg-slate-900 text-white font-bold p-1 rounded-lg absolute left-1/2 -translate-x-1/2 hover:bg-slate-700 active:bg-slate-900">
-            Add +
-          </button>
-
+        <div className="image-container w-[9rem] h-[7rem] shrink-0 relative">
           <img
-            className="object-cover object-center w-[100%] h-[100%]"
+            className="object-cover object-center w-[100%] h-[100%] rounded-lg"
             loading="lazy"
             alt="menu food image"
             src={`${IMAGE_URL}w_208,h_208,c_fit/${props?.data?.card?.info?.imageId}`}
           />
+
+          <button
+            className="bg-slate-900 text-white font-bold p-1 rounded-lg absolute left-1/2 -bottom-3 z-10 -translate-x-1/2 hover:bg-slate-700 active:bg-slate-900"
+            onClick={handleAddItem}
+          >
+            Add +
+          </button>
         </div>
       )}
     </>
