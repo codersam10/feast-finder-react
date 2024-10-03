@@ -1,15 +1,15 @@
 import { useSelector } from "react-redux";
-import { clearCart } from "../utilis/cartSlice";
+import { clearCart, removeItem } from "../utilis/cartSlice";
 import { IMAGE_URL } from "../utilis/constants";
 import { useDispatch } from "react-redux";
-
+import deleteIcon from "../assets/delete.svg";
 const Cart = () => {
   const cartItems = useSelector((store) => store.cart.items);
   const dispatch = useDispatch();
   const removeAllItems = () => {
     dispatch(clearCart());
   };
-  console.log(cartItems?.length !== 0)
+  console.log(cartItems?.length !== 0);
   return (
     <div className="flex flex-col gap-3 justify-center">
       <div>
@@ -28,19 +28,28 @@ const Cart = () => {
         </button>
       )}
 
-      {cartItems?.map((item) => {
+      {cartItems?.map((item, index) => {
         return (
           <div className="flex justify-between h-[7rem] w-1/2 mx-auto">
             <div>
               <h3>{item.name}</h3>
               <p>{`Rs. ${item.price / 100}`}</p>
             </div>
-            <img
-              className="object-cover object-top w-[10rem] h-full rounded-lg "
-              loading="lazy"
-              alt="menu food image"
-              src={`${IMAGE_URL}w_208,h_208,c_fit/${item?.imageId}`}
-            />
+            <div className="relative">
+              <img
+                className="object-cover object-top w-[10rem] h-full rounded-lg shrink-0 shadow-sm "
+                loading="lazy"
+                alt="menu food image"
+                src={`${IMAGE_URL}w_208,h_208,c_fit/${item?.imageId}`}
+              />
+              <button
+                className="absolute bottom-0 right-0 bg-black text-white rounded-tl-md rounded-br-md px-2 hover:scale-110"
+                title="Remove Item"
+                onClick={() => dispatch(removeItem(index))}
+              >
+                <img src={deleteIcon} />
+              </button>
+            </div>
           </div>
         );
       })}
