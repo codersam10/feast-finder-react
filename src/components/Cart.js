@@ -33,7 +33,11 @@ const Cart = () => {
           <div className="flex justify-between h-[7rem] w-1/2 mx-auto">
             <div>
               <h3>{item.name}</h3>
-              <p>{`Rs. ${item.price / 100}`}</p>
+              <p>{`Rs. ${
+                item.price === undefined
+                  ? item.defaultPrice / 100
+                  : item.price / 100
+              }`}</p>
             </div>
             <div className="relative">
               <img
