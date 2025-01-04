@@ -54,13 +54,13 @@ const Header = () => {
   };
 
   return (
-    <div className="header sticky top-0 z-50 bg-[hsla(0,0%,100%,0.8)]  backdrop-blur-xl flex justify-between shadow-md ">
-      <div className="logo-container w-28 p-5">
+    <div className="h-24 header sticky top-0 z-50 bg-[hsla(0,0%,100%,0.8)] backdrop-blur-xl flex justify-between shadow-md">
+      <div className="logo-container w-28 py-1 px-2">
         <Link to="/">
           <img
             src={logo}
             alt="logo"
-            className="logo"
+            className="logo h-full w-full"
           ></img>
         </Link>
       </div>
