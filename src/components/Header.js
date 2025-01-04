@@ -30,7 +30,6 @@ const Header = () => {
       console.error(`Error logging out: ${error}`);
     }
   };
-console.log(authenticatedUserData);
 
   return (
     <div className="h-24 header sticky top-0 z-50 bg-[hsla(0,0%,100%,0.8)] backdrop-blur-xl flex justify-between shadow-md">
@@ -62,16 +61,19 @@ console.log(authenticatedUserData);
                   Cart({cartItems?.length})
                 </li>
               </Link>
-
-              <Link to="/signup">
-                <button className="shadow-lg p-2 rounded-md">Sign Up</button>
-              </Link>
-              <button
-                className="shadow-lg p-2 rounded-md"
-                onClick={handleSignOut}
-              >
-                Sign out
-              </button>
+              {/* conditionally render signup and signout button */}
+              {loggedInUser ? (
+                <button
+                  className="shadow-lg p-2 rounded-md"
+                  onClick={handleSignOut}
+                >
+                  Sign out
+                </button>
+              ) : (
+                <Link to="/signup">
+                  <button className="shadow-lg p-2 rounded-md">Sign Up</button>
+                </Link>
+              )}
             </div>
           </div>
           <li>Hello, {loggedInUser ? loggedInUser?.name : "User"}</li>
