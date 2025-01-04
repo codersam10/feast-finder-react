@@ -52,11 +52,12 @@ const Body = () => {
         />
 
         {/* restaurants display section */}
-        <div className="res-container flex flex-wrap gap-5 justify-center py-2.5 w-[95%] mx-auto">
+        <div className="res-container grid grid-cols-1 px-10 md:grid-cols-2 lg:grid-cols-4 gap-5 md:px-5">
           {filteredRestaurants?.map((restaurant) => (
             <Link
               key={restaurant.info.id}
               to={"/restaurant/" + restaurant.info.id}
+              className="max-w-[25rem] w-full mx-auto"
             >
               {/* opened not-opened functionality */}
               {restaurant?.info?.availability?.opened ? (
