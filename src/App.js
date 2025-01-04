@@ -6,12 +6,12 @@ import Body from "./components/Body";
 import Contact from "./components/Contact";
 import About from "./components/About";
 import Error from "./components/Error";
-import UserContext from "./utilis/UserContext";
 import { Provider } from "react-redux";
 import appStore from "./utilis/appStore";
 import Cart from "./components/Cart";
 import SignUp from "./components/SignUp";
 import SignIn from "./components/SignIn";
+import UserContextProvider from "./utilis/UserContextProvider";
 
 //React lazy loading implementation
 const Grocery = lazy(() => import("./components/Grocery"));
@@ -20,14 +20,13 @@ const RestaurantMenu = lazy(() => import("./components/RestaurantMenu"));
 const App = () => {
   return (
     <Provider store={appStore}>
-      <UserContext.Provider value={{ loggedInUser: "Sam" }}>
+      <UserContextProvider>
         <div className="app-container">
           <Header />
           <Outlet />
         </div>
-      </UserContext.Provider>
+      </UserContextProvider>
     </Provider>
-    
   );
 };
 

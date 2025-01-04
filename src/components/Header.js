@@ -1,15 +1,13 @@
 import logo from "../assets/logo.svg";
-import { useState, useContext, useEffect } from "react";
+import { useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import useOnlineStatus from "../utilis/useOnlineStatus";
 import UserContext from "../utilis/UserContext";
-import { auth, db } from "./Firebase";
-import { getDoc, doc } from "firebase/firestore";
+import { auth } from "../utilis/Firebase";
 import { useSelector } from "react-redux";
 
 const Header = () => {
   const [hamburgerOpen, setHamburgerOpen] = useState(false);
-  const [userDetails, setUserDetails] = useState(null);
 
   // subscribing to cart from redux store
   const cartItems = useSelector((store) => store.cart.items);
@@ -20,38 +18,19 @@ const Header = () => {
 
   const onlineStatus = useOnlineStatus();
 
-  const data = useContext(UserContext);
-
-  const fetchUserData = async () => {
-    console.log("fetching user data...");
-    try {
-      auth.onAuthStateChanged(async (user) => {
-        if (!user) return;
-        const docRef = doc(db, "Users", user.uid);
-        const docSnap = await getDoc(docRef);
-        if (docSnap.exists()) {
-          setUserDetails(docSnap.data());
-        } else {
-          console.log("User nt signed in");
-        }
-      });
-    } catch (error) {
-      console.error(error);
-    }
-  };
-  useEffect(() => {
-    fetchUserData();
-  }, []);
+  const authenticatedUserData = useContext(UserContext);
+  const { loggedInUser, setLoggedInUser } = authenticatedUserData;
 
   const handleSignOut = async () => {
     try {
       await auth.signOut();
-      setUserDetails(null);
+      setLoggedInUser(null);
       alert("signed out!");
     } catch (error) {
       console.error(`Error logging out: ${error}`);
     }
   };
+console.log(authenticatedUserData);
 
   return (
     <div className="h-24 header sticky top-0 z-50 bg-[hsla(0,0%,100%,0.8)] backdrop-blur-xl flex justify-between shadow-md">
@@ -95,10 +74,7 @@ const Header = () => {
               </button>
             </div>
           </div>
-
-          <li>
-            Hello, {data.loggedInUser} {userDetails?.name}
-          </li>
+          <li>Hello, {loggedInUser ? loggedInUser?.name : "User"}</li>
 
           {/* hamburger btn */}
           <button
@@ -147,7 +123,9 @@ const Header = () => {
                 <li className="hover:text-slate-600">Grocery</li>
               </Link>
               <Link to="/cart">
-                <li className="hover:text-slate-600">Cart({cartItems?.length})</li>
+                <li className="hover:text-slate-600">
+                  Cart({cartItems?.length})
+                </li>
               </Link>
               <Link to="/signup">
                 <button className="shadow-lg p-2 rounded-md w-full">
