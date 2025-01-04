@@ -20,6 +20,7 @@ const Body = () => {
       if (!data.ok) {
         throw new Error(`HTTP error! Status: ${data.status}`);
       }
+      // console.log(await data.json());
       const json = await data.json();
 
       //fetch data that won't be modified
