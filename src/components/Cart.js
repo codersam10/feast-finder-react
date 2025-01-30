@@ -51,7 +51,7 @@ const Cart = () => {
                 title="Remove Item"
                 onClick={() => dispatch(removeItem(index))}
               >
-                <img src={deleteIcon} />
+                <img src={deleteIcon} alt="delete-icon"/>
               </button>
             </div>
           </div>
