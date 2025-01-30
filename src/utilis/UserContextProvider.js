@@ -5,6 +5,7 @@ import { auth, db } from "./Firebase";
 const UserContextProvider = ({ children }) => {
   const [loggedInUser, setLoggedInUser] = useState(null);
 
+  //set logged in user
   const fetchUserData = async () => {
     console.log("fetching user data...");
     try {
@@ -26,9 +27,20 @@ const UserContextProvider = ({ children }) => {
     fetchUserData();
   }, []);
 
+  //sign out
+  const handleSignOut = async () => {
+    try {
+      await auth.signOut();
+      setLoggedInUser(null);
+      alert("signed out!");
+    } catch (error) {
+      console.error(`Error logging out: ${error}`);
+    }
+  };
+
   return (
     // prettier-ignore
-    <UserContext.Provider value={{loggedInUser, setLoggedInUser}}>
+    <UserContext.Provider value={{loggedInUser, handleSignOut}}>
         {children}
     </UserContext.Provider>
   );

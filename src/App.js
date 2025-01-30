@@ -12,6 +12,7 @@ import Cart from "./components/Cart";
 import SignUp from "./components/SignUp";
 import SignIn from "./components/SignIn";
 import UserContextProvider from "./utilis/UserContextProvider";
+import BottomNavBar from "./components/BottomNavBar";
 
 //React lazy loading implementation
 const Grocery = lazy(() => import("./components/Grocery"));
@@ -24,6 +25,7 @@ const App = () => {
         <div className="app-container">
           <Header />
           <Outlet />
+          <BottomNavBar/>
         </div>
       </UserContextProvider>
     </Provider>

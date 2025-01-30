@@ -1,38 +1,28 @@
 import logo from "../assets/logo.svg";
 import { useState, useContext } from "react";
+import UserContext from "../utilis/UserContext";
 import { Link } from "react-router-dom";
 import useOnlineStatus from "../utilis/useOnlineStatus";
-import UserContext from "../utilis/UserContext";
-import { auth } from "../utilis/Firebase";
 import { useSelector } from "react-redux";
+import { transcode } from "buffer";
 
 const Header = () => {
-  const [hamburgerOpen, setHamburgerOpen] = useState(false);
+  const [isShowSidebar, setIsShowSidebar] = useState(false);
 
+  const sidebarStyle = {
+    transform: isShowSidebar ? "translateX(0)" : "translateX(100%)",
+    transition: "transform 0.4s ease",
+  };
   // subscribing to cart from redux store
   const cartItems = useSelector((store) => store.cart.items);
-
-  const handleHamburgerClick = () => {
-    setHamburgerOpen(!hamburgerOpen);
-  };
 
   const onlineStatus = useOnlineStatus();
 
   const authenticatedUserData = useContext(UserContext);
-  const { loggedInUser, setLoggedInUser } = authenticatedUserData;
-
-  const handleSignOut = async () => {
-    try {
-      await auth.signOut();
-      setLoggedInUser(null);
-      alert("signed out!");
-    } catch (error) {
-      console.error(`Error logging out: ${error}`);
-    }
-  };
+  const { loggedInUser, handleSignOut } = authenticatedUserData;
 
   return (
-    <div className="h-24 header sticky top-0 z-50 bg-[hsla(0,0%,100%,0.8)] backdrop-blur-xl flex justify-between shadow-md">
+    <div className="header h-24 sticky top-0 z-50 bg-[hsla(0,0%,100%,0.8)] backdrop-blur-xl flex justify-between shadow-md">
       <div className="logo-container w-28 py-1 px-2">
         <Link to="/">
           <img
@@ -42,107 +32,77 @@ const Header = () => {
           ></img>
         </Link>
       </div>
-      <div className="nav-items pr-3">
-        <ul className="items-center h-[100%] flex gap-6">
+      <div className="nav-items flex">
+        <ul className="hidden md:flex items-center h-[100%] gap-6">
           <li> {onlineStatus ? "🟢Online" : "🔴Offline"}</li>
-          <div className="hidden md:block">
-            <div className="flex items-center gap-6">
-              <Link to="/about">
-                <li className="hover:text-slate-600">About</li>
-              </Link>
-              <Link to="/contact">
-                <li className="hover:text-slate-600">Contact</li>
-              </Link>
-              <Link to="/grocery">
-                <li className="hover:text-slate-600">Grocery</li>
-              </Link>
-              <Link to="/cart">
-                <li className="hover:text-slate-600">
-                  Cart({cartItems?.length})
-                </li>
-              </Link>
-              {/* conditionally render signup and signout button */}
-              {loggedInUser ? (
-                <button
-                  className="shadow-lg p-2 rounded-md"
-                  onClick={handleSignOut}
-                >
-                  Sign out
-                </button>
-              ) : (
-                <Link to="/signup">
-                  <button className="shadow-lg p-2 rounded-md">Sign Up</button>
-                </Link>
-              )}
-            </div>
-          </div>
-          <li>Hello, {loggedInUser ? loggedInUser?.name : "User"}</li>
-
-          {/* hamburger btn */}
-          <button
-            type="button"
-            onClick={handleHamburgerClick}
-            className=" text-gray-500 md:hidden"
-          >
-            {hamburgerOpen ? (
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                height="24px"
-                viewBox="0 -960 960 960"
-                width="24px"
-                fill="#5f6368"
-              >
-                <path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z" />
-              </svg>
-            ) : (
-              <svg
-                className="rotate-180"
-                xmlns="http://www.w3.org/2000/svg"
-                height="24px"
-                viewBox="0 -960 960 960"
-                width="24px"
-                fill="currentColor"
-              >
-                <path d="M120-240v-80h720v80H120Zm0-200v-80h720v80H120Zm0-200v-80h720v80H120Z" />
-              </svg>
-            )}
-          </button>
-
-          {/* hamburger menu */}
+          <Link to="/about">
+            <li className="hover:text-slate-600">About</li>
+          </Link>
+          <Link to="/contact">
+            <li className="hover:text-slate-600">Contact</li>
+          </Link>
+          <Link to="/grocery">
+            <li className="hover:text-slate-600">Grocery</li>
+          </Link>
+          <Link to="/cart">
+            <li className="hover:text-slate-600">Cart({cartItems?.length})</li>
+          </Link>
+        </ul>
+        <div className="grid place-content-center px-3">
           <div
-            className={`${
-              hamburgerOpen ? "block" : "hidden"
-            } absolute top-[120%] w-1/2 right-5 z-10`}
+            className="grid place-content-center px-1 font-bold w-10 h-10 rounded-full cursor-pointer text-white bg-slate-500"
+            onClick={() => {
+              setIsShowSidebar(true);
+            }}
           >
-            <div className="flex flex-col gap-5 bg-[hsla(0,0%,100%,0.9)] text-center border-2 border-slate-500 md:hidden p-4 rounded-lg">
-              <Link to="/about">
-                <li className="hover:text-slate-600">About</li>
-              </Link>
-              <Link to="/contact">
-                <li className="hover:text-slate-600">Contact</li>
-              </Link>
-              <Link to="/grocery">
-                <li className="hover:text-slate-600">Grocery</li>
-              </Link>
-              <Link to="/cart">
-                <li className="hover:text-slate-600">
-                  Cart({cartItems?.length})
-                </li>
-              </Link>
-              <Link to="/signup">
-                <button className="shadow-lg p-2 rounded-md w-full">
-                  Sign Up
-                </button>
-              </Link>
+            {loggedInUser ? loggedInUser?.name[0] : "User"}
+          </div>
+        </div>
+      </div>
+      <div
+      className="fixed top-0 bottom-0 right-0 left-0 h-screen w-screen flex"
+        style={sidebarStyle}
+      >
+        <div className="grow" onClick={() => setIsShowSidebar(false)}>
+        </div>
+        <div className="side-bar shadow-md top-0 bottom-1 right-1 h-screen w-2/5 md:w-1/4 bg-[hsla(0,0%,100%)]"
+        >
+        <svg
+          className="w-8 h-8 absolute top-5 right-8 cursor-pointer"
+          onClick={() => {
+            setIsShowSidebar(false);
+          }}
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          fill="currentColor"
+        >
+          <path d="M11.9997 10.5865L16.9495 5.63672L18.3637 7.05093L13.4139 12.0007L18.3637 16.9504L16.9495 18.3646L11.9997 13.4149L7.04996 18.3646L5.63574 16.9504L10.5855 12.0007L5.63574 7.05093L7.04996 5.63672L11.9997 10.5865Z"></path>
+        </svg>
+        <div className="pt-16 p-3">
+          <div className=" rounded-lg overflow-hidden border"> 
+
+            <h2 className="p-2 font-semibold bg-slate-200">
+              Hello, {loggedInUser ? loggedInUser?.name : "User"}
+            </h2>
+            {/* conditionally render signup and signout button */}
+            {loggedInUser ? (
               <button
-                className="shadow-lg p-2 rounded-md"
+                className="p-2 mt-3 mb-6 w-[90%] mx-auto rounded-md bg-slate-100"
                 onClick={handleSignOut}
               >
                 Sign out
               </button>
-            </div>
+            ) : (
+              <Link style={{display: "block", margin: "0 1rem" }} to="/signup">
+                <button className="p-2 mt-3 mb-6 w-[100%] rounded-md bg-slate-100 hover:bg-slate-200">
+                  Sign Up
+                </button>
+              </Link>
+            )}
           </div>
-        </ul>
+        </div>
+
+        </div>
       </div>
     </div>
   );
