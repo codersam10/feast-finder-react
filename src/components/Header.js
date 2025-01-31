@@ -60,7 +60,7 @@ const Header = () => {
         </div>
       </div>
       <div
-      className="fixed top-0 bottom-0 right-0 left-0 h-screen w-screen flex"
+      className="side-bar-wrapper fixed top-0 bottom-0 right-0 left-0 w-screen flex"
         style={sidebarStyle}
       >
         <div className="grow" onClick={() => setIsShowSidebar(false)}>

@@ -22,7 +22,7 @@ const App = () => {
   return (
     <Provider store={appStore}>
       <UserContextProvider>
-        <div className="app-container">
+        <div className="app-container overflow-x-clip">
           <Header />
           <Outlet />
           <BottomNavBar/>
