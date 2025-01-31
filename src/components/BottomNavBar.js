@@ -9,6 +9,12 @@ const BottomNavBar = () => {
       <ul className="flex items-center justify-evenly bg-[hsla(0,0%,100%,0.9)] backdrop-blur-xl text-center md:hidden">
         <Link
           className="grow"
+          to="/"
+        >
+          <li className="hover:text-slate-600 py-3">Home</li>
+        </Link>
+        <Link
+          className="grow"
           to="/about"
         >
           <li className="hover:text-slate-600 py-3">About</li>
