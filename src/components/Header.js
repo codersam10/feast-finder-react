@@ -63,9 +63,9 @@ const Header = () => {
       className="side-bar-wrapper fixed top-0 bottom-0 right-0 left-0 w-screen flex"
         style={sidebarStyle}
       >
-        <div className="grow" onClick={() => setIsShowSidebar(false)}>
+        <div className="grow h-screen" onClick={() => setIsShowSidebar(false)}>
         </div>
-        <div className="side-bar shadow-md top-0 bottom-1 right-1 h-screen w-2/5 md:w-1/4 bg-[hsla(0,0%,100%)]"
+        <div className="side-bar shadow-md h-screen w-2/5 md:w-1/4 bg-[hsla(0,0%,100%)]"
         >
         <svg
           className="w-8 h-8 absolute top-5 right-8 cursor-pointer"
@@ -87,7 +87,7 @@ const Header = () => {
             {/* conditionally render signup and signout button */}
             {loggedInUser ? (
               <button
-                className="p-2 mt-3 mb-6 w-[90%] mx-auto rounded-md bg-slate-100"
+                className="block p-2 mt-3 mb-6 mx-auto w-[90%] rounded-md bg-slate-100"
                 onClick={handleSignOut}
               >
                 Sign out
