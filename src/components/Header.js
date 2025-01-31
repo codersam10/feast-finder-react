@@ -87,7 +87,7 @@ const Header = () => {
             {/* conditionally render signup and signout button */}
             {loggedInUser ? (
               <button
-                className="p-2 mt-3 mb-6 w-[90%] mx-auto rounded-md bg-slate-100"
+                className="block p-2 mt-3 mb-6 mx-auto w-[90%] rounded-md bg-slate-100"
                 onClick={handleSignOut}
               >
                 Sign out
