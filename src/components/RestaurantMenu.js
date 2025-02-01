@@ -11,7 +11,7 @@ const RestaurantMenu = () => {
   const menuInfo = useRestaurantMenu(resId);
 
   if (menuInfo === null) return <Shimmer />;
- 
+
   //destructure fetched data to get restaurant name, cuisines etc
   const {
     name: resName,
@@ -19,12 +19,15 @@ const RestaurantMenu = () => {
     cuisines,
   } = menuInfo?.cards[2]?.card?.card?.info;
 
+  // user agent specific accessing as different api is provided for windows vs android
+  const index = navigator.userAgent.includes("Windows") ? 4 : 5;
+
   //filter cards with "@type" of "NestedItemCategory" for creating menu category
-  const categories =
-    menuInfo?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards?.filter(
-      (category) =>
-        category?.card?.card?.["@type"].toLowerCase().includes("itemcategory")
-    );
+  const categories = menuInfo?.cards[
+    index
+  ]?.groupedCard?.cardGroupMap?.REGULAR?.cards?.filter((category) =>
+    category?.card?.card?.["@type"].toLowerCase().includes("itemcategory")
+  );
 
   return (
     <>
@@ -39,7 +42,6 @@ const RestaurantMenu = () => {
 
       <div className="menu-section mx-auto p-4 w-full md:w-7/12">
         {categories?.map((category) => {
-
           return (
             <div
               key={category?.card?.card?.title}

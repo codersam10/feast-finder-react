@@ -23,15 +23,18 @@ const Body = () => {
       // console.log(await data.json());
       const json = await data.json();
 
+      // user agent specific accessing as different api is provided for windows vs android
+      const index = navigator.userAgent.includes("Windows") ? 4 : 2;
+
       //fetch data that won't be modified
       setListOfRestaurants(
-        json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle
+        json?.data?.cards[index]?.card?.card?.gridElements?.infoWithStyle
           ?.restaurants
       );
 
       //copy of fetch data that will be used for searching and filtering
       setFilteredRestaurants(
-        json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle
+        json?.data?.cards[index]?.card?.card?.gridElements?.infoWithStyle
           ?.restaurants
       );
     } catch (error) {
