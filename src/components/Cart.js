@@ -9,7 +9,6 @@ const Cart = () => {
   const removeAllItems = () => {
     dispatch(clearCart());
   };
-  console.log(cartItems?.length !== 0);
   return (
     <div className="flex flex-col gap-3 justify-center">
       <div>
@@ -30,7 +29,7 @@ const Cart = () => {
 
       {cartItems?.map((item, index) => {
         return (
-          <div className="flex justify-between h-[7rem] w-1/2 mx-auto">
+          <div key={item.id} className="flex justify-between h-[7rem] w-1/2 mx-auto">
             <div>
               <h3>{item.name}</h3>
               <p>{`Rs. ${
