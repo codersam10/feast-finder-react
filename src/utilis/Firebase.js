@@ -10,7 +10,7 @@ import { getFirestore } from "firebase/firestore";
 // Firebase configuration
 const firebaseConfig = {
   apiKey: process.env.FIREBASE_API_KEY,
-  authDomain: "feast-finder-react.firebaseapp.com",
+  authDomain: "main--fancy-lolly-e08455.netlify.app",
   projectId: "feast-finder-react",
   storageBucket: "feast-finder-react.appspot.com",
   messagingSenderId: "489613586211",
