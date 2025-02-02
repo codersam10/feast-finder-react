@@ -27,35 +27,43 @@ const Cart = () => {
         </button>
       )}
 
-      {cartItems?.map((item, index) => {
-        return (
-          <div key={item.id} className="flex justify-between h-[7rem] w-1/2 mx-auto">
-            <div>
-              <h3>{item.name}</h3>
-              <p>{`Rs. ${
-                item.price === undefined
-                  ? item.defaultPrice / 100
-                  : item.price / 100
-              }`}</p>
+      <div className="cart-items m-4 flex flex-col gap-3">
+        {cartItems?.map((item, index) => {
+          return (
+            <div
+              key={item.id}
+              className="flex justify-between gap-3 p-3 bg-slate-300 rounded-md h-40 w-full mx-auto md:w-7/12"
+            >
+              <div>
+                <h3>{item.name}</h3>
+                <p>{`Rs. ${
+                  item.price === undefined
+                    ? item.defaultPrice / 100
+                    : item.price / 100
+                }`}</p>
+              </div>
+              <div className="relative shrink-0">
+                <img
+                  className="object-cover object-top w-[10rem] h-full rounded-lg shrink-0 shadow-sm "
+                  loading="lazy"
+                  alt="menu food image"
+                  src={`${IMAGE_URL}w_208,h_208,c_fit/${item?.imageId}`}
+                />
+                <button
+                  className="absolute bottom-0 right-0 bg-black text-white rounded-tl-md rounded-br-md px-2 hover:scale-110"
+                  title="Remove Item"
+                  onClick={() => dispatch(removeItem(index))}
+                >
+                  <img
+                    src={deleteIcon}
+                    alt="delete-icon"
+                  />
+                </button>
+              </div>
             </div>
-            <div className="relative">
-              <img
-                className="object-cover object-top w-[10rem] h-full rounded-lg shrink-0 shadow-sm "
-                loading="lazy"
-                alt="menu food image"
-                src={`${IMAGE_URL}w_208,h_208,c_fit/${item?.imageId}`}
-              />
-              <button
-                className="absolute bottom-0 right-0 bg-black text-white rounded-tl-md rounded-br-md px-2 hover:scale-110"
-                title="Remove Item"
-                onClick={() => dispatch(removeItem(index))}
-              >
-                <img src={deleteIcon} alt="delete-icon"/>
-              </button>
-            </div>
-          </div>
-        );
-      })}
+          );
+        })}
+      </div>
     </div>
   );
 };
