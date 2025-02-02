@@ -11,31 +11,31 @@ const BottomNavBar = () => {
           className="grow"
           to="/"
         >
-          <li className="hover:text-slate-600 py-3">Home</li>
+          <li className="active:text-slate-600 py-3">Home</li>
         </Link>
         <Link
           className="grow"
           to="/about"
         >
-          <li className="hover:text-slate-600 py-3">About</li>
+          <li className="active:text-slate-600 py-3">About</li>
         </Link>
         <Link
           className="grow"
           to="/contact"
         >
-          <li className="hover:text-slate-600 py-3">Contact</li>
+          <li className="active:text-slate-600 py-3">Contact</li>
         </Link>
         <Link
           className="grow"
           to="/grocery"
         >
-          <li className="hover:text-slate-600 py-3">Grocery</li>
+          <li className="active:text-slate-600 py-3">Grocery</li>
         </Link>
         <Link
           className="grow"
           to="/cart"
         >
-          <li className="hover:text-slate-600 py-3">
+          <li className="active:text-slate-600 py-3">
             Cart({cartItems?.length})
           </li>
         </Link>
