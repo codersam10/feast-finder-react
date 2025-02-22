@@ -1,7 +1,6 @@
 import { IMAGE_URL } from "../utilis/constants";
 //svgs are imported as string
 import star from "../assets/star.svg";
-import tag from "../assets/tag.svg";
 
 const RestaurantCard = (props) => {
   const { restData } = props;
@@ -43,29 +42,6 @@ const RestaurantCard = (props) => {
       </div>
     </div>
   );
-};
-
-//Higher order component
-export const withOpenedCard = (RestaurantCard) => {
-  return (props) => {
-    return (
-      <div className="relative max-w-[25rem] hover:-translate-y-3 duration-[250ms] will-change-transform">
-        <label className="z-10 rounded-tl-xl overflow-hidden absolute top-0 left-0 flex">
-          <span className="text-xs px-2 py-1.5 bg-black text-white font-bold">
-            Open
-          </span>
-          <span>
-            <img
-              className="h-7"
-              src={tag}
-              alt="tag-icon"
-            />
-          </span>
-        </label>
-        <RestaurantCard {...props} />
-      </div>
-    );
-  };
 };
 
 export default RestaurantCard;

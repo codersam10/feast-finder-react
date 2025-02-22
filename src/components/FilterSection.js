@@ -11,8 +11,9 @@ const FilterSection = ({ listOfRestaurants, setFilteredRestaurants }) => {
     );
     setFilteredRestaurants(filteredList);
   };
+  
   return (
-    <div className="filter-section px-2 py-5 flex flex-wrap gap-3">
+    <section className="filter-section px-2 py-5 flex flex-wrap gap-3">
       <form
         onSubmit={searchFilteredList}
         className="shadow-lg rounded-lg inline-block"
@@ -52,7 +53,7 @@ const FilterSection = ({ listOfRestaurants, setFilteredRestaurants }) => {
       >
         Show All
       </button>
-    </div>
+    </section>
   );
 };
 
