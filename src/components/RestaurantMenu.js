@@ -30,15 +30,15 @@ const RestaurantMenu = () => {
   );
 
   return (
-    <>
-      <div className="rest-info">
-        <h1 className="font-semibold text-xl mt-5">{resName}</h1>
+    <main>
+      <div className="rest-info p-5">
+        <h1 className="font-semibold text-xl">{resName}</h1>
         <p>
           {cuisines.join(", ")} - {costForTwoMessage}
         </p>
       </div>
 
-      <hr className="m-10" />
+      <hr className="mb-5 mx-5" />
 
       <div className="menu-section mx-auto p-4 w-full md:w-7/12">
         {categories?.map((category) => {
@@ -57,7 +57,7 @@ const RestaurantMenu = () => {
           );
         })}
       </div>
-    </>
+    </main>
   );
 };
 
