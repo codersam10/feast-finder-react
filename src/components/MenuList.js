@@ -6,8 +6,6 @@ const MenuList = (props) => {
   //show and hide menu feature
   const handleClick = () => {
     setShowMenu(!showMenu);
-    //another way to write this logic -
-    // showMenu === false ? setShowMenu(true) : setShowMenu(false);
   };
   return (
     <>

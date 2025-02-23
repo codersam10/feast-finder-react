@@ -66,7 +66,7 @@ const MenuVariety = (props) => {
           />
 
           <button
-            className="bg-slate-900 text-white font-bold p-1 rounded-lg absolute left-1/2 -bottom-3 z-10 -translate-x-1/2 hover:bg-slate-700 active:bg-slate-900"
+            className="bg-slate-950 text-white font-bold p-1 rounded-lg absolute left-1/2 -bottom-3 z-10 -translate-x-1/2  active:bg-slate-800"
             onClick={handleAddItem}
           >
             Add +
